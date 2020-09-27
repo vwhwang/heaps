@@ -79,27 +79,24 @@ class MinHeap
   #  moves it up the heap if it's smaller
   #  than it's parent node.
   def heap_down(index)
-    return nil if @store.empty?
-
+ 
+    min = index 
     left = 2 * index + 1 
     right = 2 * index + 2 
 
-    if left > @store.length || right > @store.length
-      return @store
-    end 
-
-    if @store[left].key > @store[right].key
-      min = right  
-    else  
+    if left < @store.length && @store[left].key < @store[min].key
       min = left 
     end 
 
-    if @store[index].key <= @store[min].key
-      return @store 
-    else  
+    if right < @store.length && @store[right].key < @store[min].key
+      min = right 
+    end
+
+    if min != index 
       swap(index, min)
       heap_down(min)
     end 
+
   end
 
   # If you want a swap method... you're welcome
